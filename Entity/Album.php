@@ -116,7 +116,7 @@ class Album
                     <p class="card-text"></p>
                     <p class="card-text">'. $this->getReleaseDate() .'</p>
                     <a href="' . $this->getLink() . '" target="_blank" class="btn btn-success">-> Spotify</a>
-                    <a href="/artistes/albumDetails/' . $this->getId() . '" class="btn btn-primary">->Détails</a>
+                    <a href="/album/albumDetails/' . $this->getId() . '" class="btn btn-primary">->Détails</a>
                 </div>
             </div>
             

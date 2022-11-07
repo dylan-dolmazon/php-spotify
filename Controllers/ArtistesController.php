@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Entity\Artist;
+use App\Controllers\AlbumController;
 
 use function MongoDB\BSON\toJSON;
 
@@ -35,26 +36,12 @@ class ArtistesController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         $artist = json_decode($result);
-        curl_setopt($ch, CURLOPT_URL, "https://api.spotify.com/v1/artists/$id/albums");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $_SESSION['token'] ));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        $albums = json_decode($result);
         curl_close($ch);
 
+        $albums = new AlbumController();
+        $albums = $albums->index($id);
+
         $this->render('artistes/details',compact('artist','albums'));
-    }
-
-    public function albumDetails($id) {
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.spotify.com/v1/albums/$id");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $_SESSION['token'] ));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        $album = json_decode($result);
-
-        $this->render('artistes/albumDetails',compact('album'));
     }
 
     public function addFavorite($id){
@@ -75,4 +62,5 @@ class ArtistesController extends Controller
         $artist->create();
         header('location: /artistes/index');
     }
+
 }
