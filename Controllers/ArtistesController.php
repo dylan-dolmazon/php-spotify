@@ -60,7 +60,7 @@ class ArtistesController extends Controller
 
         $artist = new Artist($result->id,$result->name,$result->followers->total,$result->external_urls->spotify,$defaultImage,$result->genres);
         $artist->create();
-        header('location: /artistes/index');
+        header('location: /favorite/index');
     }
 
 }

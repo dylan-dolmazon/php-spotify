@@ -53,12 +53,14 @@ class Model extends Db
         foreach ($this as $field => $value) {
             // INSERT INTO annonces (titre, description, actif) VALUES (?, ?, ?)
             if ($value !== null && $field != 'db' && $field != 'table') {
-                if(gettype($value)){
-                    $value = json_encode($value);
+                if(is_array($value)){
+                    $values[] = json_encode($value);
+                }else{
+                    $values[] = $value;
                 }
                 $fields[] = $field;
                 $inter[] = "?";
-                $values[] = $value;
+
             }
         }
 
@@ -92,9 +94,9 @@ class Model extends Db
         return $this->requete('UPDATE ' . $this->table . ' SET ' . $fieldsList . ' WHERE id = ?', $values);
     }
 
-    public function delete(int $id): bool|\PDOStatement
+    public function delete(string $id): bool|\PDOStatement
     {
-        return $this->requete("DELETE FROM {$this->table} WHERE id = ?", [$id]);
+        return $this->requete("DELETE FROM {$this->table} WHERE idSpotify = ?", [$id]);
     }
 
 

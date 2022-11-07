@@ -19,7 +19,7 @@ class Artist extends Model
 
         public string $picture,
 
-        public array  $genders,
+        public array|string $genders,
 
     )
     {
@@ -171,4 +171,33 @@ class Artist extends Model
     </div>
 </div>';
     }
+
+    public function displayFavorite(): string
+    {
+        return '<div class="col-md-4">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="' . $this->getPicture() . '" class="img-fluid rounded-start"
+                     alt="' . $this->getName() . '">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">' . $this->getName() . '</h5>
+                    <p class="card-text"></p>
+                    <p class="card-text"><small
+                            class="text-muted">' . number_format($this->getFollowers()) . ' followers</small>
+                    </p>
+                    <a href="' . $this->getLink() . '" target="_blank" class="btn btn-success">-> Spotify</a>
+                    <a href="/artistes/details/' . $this->getIdSpotify() . '" class="btn btn-primary">->Détails</a>
+                    <a href="/favorite/delFavorite/' . $this->getIdSpotify() . '" class="btn btn-danger">X</a>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>';
+    }
+
 }
