@@ -43,4 +43,16 @@ class ArtistesController extends Controller
 
         $this->render('artistes/details',compact('artist','albums'));
     }
+
+    public function albumDetails($id) {
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://api.spotify.com/v1/albums/$id");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $_SESSION['token'] ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $album = json_decode($result);
+
+        $this->render('artistes/albumDetails',compact('album'));
+    }
 }
