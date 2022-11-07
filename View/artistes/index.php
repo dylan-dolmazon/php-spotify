@@ -1,3 +1,9 @@
+<form action="/artistes/index/" method="get" class="mb-4">
+    <label for="name">Artist</label>
+    <input type="text" name="name" id="name">
+    <button type="submit">Submit</button>
+</form>
+
 <?php
 use App\Entity\Artist;
 
