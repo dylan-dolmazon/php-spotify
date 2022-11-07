@@ -7,11 +7,10 @@ use App\Core\Db;
 class Model extends Db
 {
     // Table de la base de données
-    protected ?string $table;
+    protected ?string $table = '';
 
     // Instance de Db
     private $db;
-
 
     public function findAll(): bool|array
     {
@@ -54,6 +53,9 @@ class Model extends Db
         foreach ($this as $field => $value) {
             // INSERT INTO annonces (titre, description, actif) VALUES (?, ?, ?)
             if ($value !== null && $field != 'db' && $field != 'table') {
+                if(gettype($value)){
+                    $value = json_encode($value);
+                }
                 $fields[] = $field;
                 $inter[] = "?";
                 $values[] = $value;

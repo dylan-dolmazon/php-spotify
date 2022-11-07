@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Entity\Artist;
 
 use function MongoDB\BSON\toJSON;
 
@@ -54,5 +55,24 @@ class ArtistesController extends Controller
         $album = json_decode($result);
 
         $this->render('artistes/albumDetails',compact('album'));
+    }
+
+    public function addFavorite($id){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://api.spotify.com/v1/artists/$id");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $_SESSION['token'] ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $result = json_decode($result);
+
+        $defaultImage = "https://www.oiseaux.net/photos/vincent.palomares/images/pigeon.biset.vipa.1g.jpg";
+        if(!empty($result->images[0])){
+            $defaultImage = $result->images[0]->url;
+
+        }
+
+        $artist = new Artist($result->id,$result->name,$result->followers->total,$result->external_urls->spotify,$defaultImage,$result->genres);
+        $artist->create();
+        header('location: /artistes/index');
     }
 }

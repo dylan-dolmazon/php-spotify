@@ -13,9 +13,9 @@ class Db extends PDO
 
     // Informations de connexion
     private const DBHOST = 'localhost';
-    private const DBUSER = 'root';
-    private const DBPASS = '';
-    private const DBNAME = 'demo';
+    private const DBUSER = 'Dylan';
+    private const DBPASS = 'root';
+    private const DBNAME = 'spotify';
 
     private function __construct()
     {

@@ -2,33 +2,54 @@
 
 namespace App\Entity;
 
-class Artist
+class Artist extends Model
 {
 
+    public ?int $id;
+
     public function __construct(
-        public string|null $id,
 
-        public string|null $name,
+        public string $idSpotify,
 
-        public int|null    $followers,
+        public string $name,
 
-        public string|null $link,
+        public int    $followers,
 
-        public string|null $picture,
+        public string $link,
 
-        public array|null  $genders,
+        public string $picture,
+
+        public array  $genders,
+
     )
     {
+        $this->table = 'Artist';
     }
 
+    /**
+     * @param string $id
+     */
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function getIdSpotify(): string
     {
-        $this->id = $id;
+        return $this->idSpotify;
+    }
+
+    public function setIdSpotify(string $idSpotify): self
+    {
+        $this->idSpotify = $idSpotify;
         return $this;
     }
 
@@ -88,6 +109,10 @@ class Artist
         return $this;
     }
 
+    public function addFavorite(){
+        $this->create();
+    }
+
     public function displayDetails(): string
     {
         $return = '<div class="col-md-8">
@@ -137,7 +162,8 @@ class Artist
                             class="text-muted">' . number_format($this->getFollowers()) . ' followers</small>
                     </p>
                     <a href="' . $this->getLink() . '" target="_blank" class="btn btn-success">-> Spotify</a>
-                    <a href="/artistes/details/' . $this->getId() . '" class="btn btn-primary">->Détails</a>
+                    <a href="/artistes/details/' . $this->getIdSpotify() . '" class="btn btn-primary">->Détails</a>
+                    <a href="/artistes/addFavorite/' . $this->getIdSpotify() . '" class="btn btn-success">add to favorite</a>
                 </div>
             </div>
             

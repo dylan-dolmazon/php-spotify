@@ -15,7 +15,8 @@ foreach ($artists->artists->items as $a) {
         $defaultImage = $a->images[0]->url;
 
     }
-    $artist = new Artist($a->id,$a->name,$a->followers->total,$a->external_urls->spotify,$defaultImage,$a->genres);
+    $idSpotify = $a->id;
+    $artist = new Artist($idSpotify,$a->name,$a->followers->total,$a->external_urls->spotify,$defaultImage,$a->genres);
     echo $artist->display();
 }
 ?>
