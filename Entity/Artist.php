@@ -6,18 +6,17 @@ class Artist
 {
 
     public function __construct(
-        public string | null $id,
+        public string|null $id,
 
-        public string | null $name,
+        public string|null $name,
 
-        public int  | null  $followers,
+        public int|null    $followers,
 
-        public string | null $link,
+        public string|null $link,
 
-        public string | null $picture,
+        public string|null $picture,
 
-        public array | null $genders,
-
+        public array|null  $genders,
     )
     {
     }
@@ -89,26 +88,59 @@ class Artist
         return $this;
     }
 
+    public function displayDetails(): string
+    {
+        $return = '<div class="col-md-8">
+    <div class="card mb-6" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <img src="' . $this->getPicture() . '" class="img-fluid rounded-start"
+                     alt="' . $this->getName() . '">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">' . $this->getName() . '</h5>
+                    <div>';
+                        $genres = $this->getGenders();
+                        foreach ($genres as $genre) {
+                            $return .= '<p>' . $genre . '</p>';
+                        }
+                        $return .= '</div>
+                    <p class="card-text"></p>
+                    <p class="card-text"><small
+                            class="text-muted">' . number_format($this->getFollowers()) . ' followers</small>
+                    </p>
+                    <a href="' . $this->getLink() . '" target="_blank" class="btn btn-success">-> Spotify</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>';
+        return $return;
+    }
 
-    public function display():string
+    public function display(): string
     {
         return '<div class="col-md-4">
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="'.$this->getPicture().'" class="img-fluid rounded-start"
-                     alt="'.$this->getName().'">
+                <img src="' . $this->getPicture() . '" class="img-fluid rounded-start"
+                     alt="' . $this->getName() . '">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">'.$this->getName().'</h5>
+                    <h5 class="card-title">' . $this->getName() . '</h5>
                     <p class="card-text"></p>
                     <p class="card-text"><small
-                            class="text-muted">'.number_format($this->getFollowers()).' followers</small>
+                            class="text-muted">' . number_format($this->getFollowers()) . ' followers</small>
                     </p>
-                    <a href="'.$this->getLink().'" target="_blank" class="btn btn-success">-> Spotify</a>
+                    <a href="' . $this->getLink() . '" target="_blank" class="btn btn-success">-> Spotify</a>
+                    <a href="/artistes/details/' . $this->getId() . '" class="btn btn-primary">->Détails</a>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>';

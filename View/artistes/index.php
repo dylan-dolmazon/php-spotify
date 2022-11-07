@@ -6,7 +6,9 @@
 
 <?php
 use App\Entity\Artist;
-
+?>
+<div class="row">
+<?php
 foreach ($artists->artists->items as $a) {
     $defaultImage = "https://www.oiseaux.net/photos/vincent.palomares/images/pigeon.biset.vipa.1g.jpg";
     if(!empty($a->images[0])){
@@ -17,3 +19,4 @@ foreach ($artists->artists->items as $a) {
     echo $artist->display();
 }
 ?>
+</div>
