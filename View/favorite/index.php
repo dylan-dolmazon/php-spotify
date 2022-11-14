@@ -4,6 +4,7 @@ use App\Entity\Artist;
 
 
 ?>
+<h2>Mes artistes favorits: </h2>
 <div class="row">
 <?php
 foreach ($datas as $a) {

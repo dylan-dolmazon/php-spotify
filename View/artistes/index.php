@@ -1,3 +1,5 @@
+
+<h2>Rechercher un artiste: </h2>
 <form action="/artistes/index/" method="get" class="mb-4">
     <label for="name">Artist</label>
     <input type="text" name="name" id="name">
@@ -7,6 +9,7 @@
 <?php
 use App\Entity\Artist;
 ?>
+<h2>Les artistes trouvés: </h2>
 <div class="row">
 <?php
 foreach ($artists->artists->items as $a) {

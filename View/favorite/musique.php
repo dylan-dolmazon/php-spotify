@@ -4,6 +4,7 @@ use App\Entity\Musique;
 
 
 ?>
+<h2>Mes musiques favorites: </h2>
     <div class="row">
 <?php
 foreach ($datas as $a) {

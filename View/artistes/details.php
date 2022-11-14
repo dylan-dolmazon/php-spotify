@@ -11,6 +11,7 @@ $defaultImage = "https://www.oiseaux.net/photos/vincent.palomares/images/pigeon.
     echo $artist->displayDetails();
 
 ?>
+<h2>Les détails de l'artiste: </h2>
     <div class="row">
 <?php
 foreach ($albums->items as $a) {
