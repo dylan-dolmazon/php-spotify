@@ -14,6 +14,7 @@ class ArtistesController extends Controller
 
         if(!empty($_GET['name'])){
             $name = $_GET['name'];
+            $name = str_replace(" ","_",$name);
         }
 
         $ch = curl_init();
