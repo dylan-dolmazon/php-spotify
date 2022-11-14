@@ -44,7 +44,7 @@ class AlbumController extends Controller
 
         $musique = new Musique($result->name, $result->external_urls->spotify, $result->id, $result->duration_ms);
         $tmp = $musique->findBy(['idSpotify'=>$musique->idSpotify]);
-        if($tmp === null) $musique->create();
+        if($tmp == null) $musique->create();
 
         header('location: /favorite/musique');
     }

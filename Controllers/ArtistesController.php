@@ -3,11 +3,8 @@
 namespace App\Controllers;
 use App\Entity\Artist;
 
-use function MongoDB\BSON\toJSON;
-
 class ArtistesController extends Controller
 {
-
     public function index(){
 
         $name = "orelsan";
