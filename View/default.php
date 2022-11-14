@@ -24,7 +24,10 @@
                 <a class="nav-link" href="/artistes/index">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/favorite/index">Favorite</a>
+                <a class="nav-link" href="/favorite/index">Artistes favorits</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/favorite/musique">Musique favorites</a>
             </li>
         </ul>
     </div>

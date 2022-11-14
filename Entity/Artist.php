@@ -109,10 +109,6 @@ class Artist extends Model
         return $this;
     }
 
-    public function addFavorite(){
-        $this->create();
-    }
-
     public function displayDetails(): string
     {
         $return = '<div class="col-md-8">
@@ -191,7 +187,6 @@ class Artist extends Model
                     <a href="' . $this->getLink() . '" target="_blank" class="btn btn-success">-> Spotify</a>
                     <a href="/artistes/details/' . $this->getIdSpotify() . '" class="btn btn-primary">->Détails</a>
                     <a href="/favorite/delFavorite/' . $this->getIdSpotify() . '" class="btn btn-danger">X</a>
-
                 </div>
             </div>
             

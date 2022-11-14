@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Entity\Artist;
+use App\Entity\Musique;
 
 class FavoriteController extends Controller
 {
@@ -17,5 +18,19 @@ class FavoriteController extends Controller
         $temp->delete($id);
 
         header('location: /favorite/index');
+    }
+
+    public function musique(){
+        $temp = new Musique('','','','');
+        $datas = $temp->findAll();
+
+        $this->render('favorite/musique', compact('datas'));
+    }
+
+    public function delMusique($id){
+        $temp = new Musique('','',0,'');
+        $temp->delete($id);
+
+        header('location: /favorite/musique');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 use App\Entity\Artist;
-use App\Controllers\AlbumController;
 
 use function MongoDB\BSON\toJSON;
 
@@ -59,7 +58,10 @@ class ArtistesController extends Controller
         }
 
         $artist = new Artist($result->id,$result->name,$result->followers->total,$result->external_urls->spotify,$defaultImage,$result->genres);
-        $artist->create();
+        $tmp = $artist->findBy(['idSpotify'=>$artist->idSpotify]);
+        if($tmp == null){
+            $artist->create();
+        }
         header('location: /favorite/index');
     }
 

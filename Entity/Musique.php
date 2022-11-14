@@ -2,31 +2,49 @@
 
 namespace App\Entity;
 
-class Musique
+class Musique extends Model
 {
+    public ?int $id;
 
     public function __construct(
-
-        public string|null $id,
 
         public string|null $name,
 
         public string|null $link,
 
-        public int $duration_ms,
+        public string|null $idSpotify,
+
+        public string $duration_ms,
 
     )
     {
+        $this->table = 'Musique';
     }
 
+    /**
+     * @param string $id
+     */
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    public function setId(string $id): self
+    public function getIdSpotify(): string
     {
-        $this->id = $id;
+        return $this->idSpotify;
+    }
+
+    public function setIdSpotify(string $id): self
+    {
+        $this->idSpotify = $id;
         return $this;
     }
 
@@ -53,15 +71,15 @@ class Musique
     }
 
     /**
-     * @param int $duration_ms
+     * @param string $duration_ms
      */
-    public function setDurationMs(int $duration_ms): void
+    public function setDurationMs(string $duration_ms): void
     {
         $this->duration_ms = $duration_ms;
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getDurationMs(): string
     {
@@ -83,6 +101,31 @@ class Musique
                     <p class="card-text">'. $this->getDurationMs() .'</p>
                     <p class="card-text"></p>
                     <a href="' . $this->getLink() . '" target="_blank" class="btn btn-success">-> Spotify</a>
+                    <a href="/album/addFavorite/' . $this->getIdSpotify() . '" class="btn btn-success">add to favorite</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>';
+    }
+
+    public function displayFavorite(): string
+    {
+        return '<div class="col-md-4">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+        <div class="col-md-4">
+                <img src="https://www.supercadeaux.fr/wp-content/uploads/2019/02/Disque-Dor-personnalisee-1.jpg" class="img-fluid rounded-start"
+                     alt="' . $this->getName() . '">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">' . $this->getName() . '</h5>
+                    <p class="card-text">'. $this->getDurationMs() .'</p>
+                    <p class="card-text"></p>
+                    <a href="' . $this->getLink() . '" target="_blank" class="btn btn-success">-> Spotify</a>
+                    <a href="/favorite/delMusique/' . $this->getIdSpotify() . '" class="btn btn-danger">X</a>
                 </div>
             </div>
             
